@@ -22,6 +22,9 @@ public class AppConfig {
     @Value("${payment.url}")
     private String paymentUrl;
 
+    @Value("${payment.api.key}")
+    private String apiKey;
+
     @Bean
     public WebClient getWebClient() throws SSLException {
 
@@ -30,12 +33,10 @@ public class AppConfig {
                 .build();
 
         HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(context));
-
         MultiValueMap<String, String> valueMap = new LinkedMultiValueMap<>();
 
-        valueMap.add(ACCESS_CODE, zbAccessCode);
-        valueMap.add(ACCESS_PASSWORD, zbPassword);
         valueMap.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+        valueMap.add(HttpHeaders.AUTHORIZATION, "Bearer " + apiKey);
 
         return WebClient.builder()
                 .baseUrl(paymentUrl)

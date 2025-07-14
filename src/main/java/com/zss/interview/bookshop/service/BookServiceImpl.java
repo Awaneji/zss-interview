@@ -1,5 +1,7 @@
 package com.zss.interview.bookshop.service;
 
+import com.zss.interview.bookshop.customexception.BookNotFoundException;
+import com.zss.interview.bookshop.customexception.CategoryNotFoundException;
 import com.zss.interview.bookshop.dto.BookRequestDTO;
 import com.zss.interview.bookshop.dto.BookResponseDTO;
 import com.zss.interview.bookshop.model.Book;
@@ -20,12 +22,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookResponseDTO getBookById(Long id) {
-        return toResponseDTO(bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not found")));
-    }
-
-    @Override
-    public void deleteBook(Long id) {
-        bookRepository.deleteById(id);
+        return toResponseDTO(bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException("Book not found")));
     }
 
     @Override
@@ -44,7 +41,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookResponseDTO createBook(BookRequestDTO dto) {
         Category category = categoryRepository.findById(dto.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+                .orElseThrow(() -> new CategoryNotFoundException("Category not found"));
 
         Book book = new Book();
 
@@ -60,7 +57,7 @@ public class BookServiceImpl implements BookService {
     public BookResponseDTO updateBook(Long id, BookRequestDTO dto) {
 
         Category category = categoryRepository.findById(dto.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+                .orElseThrow(() -> new CategoryNotFoundException("Category not found"));
 
         Book existing = bookRepository.findById(id)
                 .map(book -> {
@@ -70,7 +67,7 @@ public class BookServiceImpl implements BookService {
                     book.setPrice(dto.getPrice());
                     return bookRepository.save(book);
                 })
-                .orElseThrow(() -> new RuntimeException("Book not found"));
+                .orElseThrow(() -> new BookNotFoundException("Book not found"));
 
         return toResponseDTO(existing);
     }

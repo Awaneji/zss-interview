@@ -1,20 +1,89 @@
-✅ Option 1: Enable Incremental Annotation Processing
 
-    Go to:
-    File → Settings → Build, Execution, Deployment → Compiler → Annotation Processors
+# Bookshop API
 
-    Ensure these are set:
+A **Spring Boot 3** application running on **Java 17** providing simple **CRUD APIs for Books and Categories**, and consuming a **Mock Payment API**.
 
-        ✅ Enable annotation processing (must be checked)
+---
 
-        ✅ Obtain processors from project classpath
+## **Features**
 
-        ✅ Use compiler: javac
+### Book API
+- Create, Read, Update, Delete Books
+- Search by Category (case-insensitive)
 
-    Then go to:
-    File → Settings → Build Tools → Gradle → Build and run using
+### Category API
+- Create, Read, Update, Delete Categories
 
-        Set to: IntelliJ IDEA (not Gradle)
+### Payment Integration (Mock)
+- Payment API consumed via `WebClient`
+- Retry logic for 5xx errors implemented
 
-    Rebuild the project fully:
-    Build → Rebuild Project
+---
+
+## **Major Dependencies**
+| Dependency                          | Purpose                          |
+|------------------------------------|----------------------------------|
+| **Lombok**                          | Reduce boilerplate (getters/setters)  |
+| **spring-boot-starter-validation**  | DTO validations                   |
+| **springdoc-openapi-starter-webmvc-ui** | Swagger / OpenAPI UI            |
+| **spring-boot-starter-webflux**     | Reactive `WebClient` for payments  |
+
+---
+
+## **Database Requirement**
+- **PostgreSQL** installed
+- Create database: `bookshop`
+- Update your **Postgres username/password** in `application.properties`:
+
+```properties
+spring.datasource.username=your-username
+spring.datasource.password=your-password
+```
+
+---
+
+## **Running the Application**
+
+### Build the JAR
+```bash
+mvn clean package -DskipTests
+```
+
+### Run the Application
+```bash
+java -jar target/{your-jar-file}.jar
+```
+
+### OR Run Directly from IDE
+Simply run the main application class.
+
+---
+
+## **API Documentation (Swagger)**
+Access via browser:  
+[http://localhost:8089/bookshop/swagger-ui/index.html](http://localhost:8089/bookshop/swagger-ui/index.html)
+
+---
+
+## **Areas for Future Improvement**
+1. Implement **Shopping Cart** for selling books.
+2. Introduce **Authors Model** for richer book metadata.
+3. Change Book → Category relation to **Many-to-Many** (books can belong to multiple categories).
+4. Add **Security Layer** (JWT / OAuth2) and enable **SSL/TLS**.
+5. Write comprehensive **Unit Tests** for all layers.
+
+---
+
+## **Known Blockers / Limitations**
+- Payment integration endpoint `https://secure.v.co.zw/interview` was **down**, preventing full end-to-end tests.
+- However, the **transaction request is correctly implemented via `WebClient`**.
+
+---
+
+## **Ports & Endpoints**
+| Resource     | URL                                |
+|--------------|------------------------------------|
+| **Swagger UI** | [http://localhost:8089/bookshop/swagger-ui/index.html](http://localhost:8089/bookshop/swagger-ui/index.html) |
+| **API Base**  | `http://localhost:8089/bookshop/api/...` |
+
+---

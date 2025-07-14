@@ -2,6 +2,7 @@ package com.zss.interview.bookshop.controller;
 
 import com.zss.interview.bookshop.model.Category;
 import com.zss.interview.bookshop.repository.CategoryRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,7 +26,7 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<Category> createCategory(@RequestBody Category category) {
+    public ResponseEntity<Category> createCategory(@RequestBody @Valid Category category) {
         return ResponseEntity.ok(categoryRepository.save(category));
     }
 }

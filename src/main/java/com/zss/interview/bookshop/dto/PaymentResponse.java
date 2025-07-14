@@ -1,4 +1,6 @@
 package com.zss.interview.bookshop.dto;
 
-public class PaymentResponse {
+import java.io.Serializable;
+
+public class PaymentResponse implements Serializable {
 }
