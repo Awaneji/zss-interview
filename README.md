@@ -68,9 +68,10 @@ Access via browser:
 ## **Areas for Future Improvement**
 1. Implement **Shopping Cart** for selling books.
 2. Introduce **Authors Model** for richer book metadata.
-3. Change Book → Category relation to **Many-to-Many** (books can belong to multiple categories).
-4. Add **Security Layer** (JWT / OAuth2) and enable **SSL/TLS**.
-5. Write comprehensive **Unit Tests** for all layers.
+3. Add Book Inventory management module
+4. Change Book → Category relation to **Many-to-Many** (books can belong to multiple categories).
+5. Add **Security Layer** (JWT / OAuth2) and enable **SSL/TLS**.
+6. Write comprehensive **Unit Tests** for all layers.
 
 ---
 
