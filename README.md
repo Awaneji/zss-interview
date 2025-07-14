@@ -8,11 +8,11 @@ A **Spring Boot 3** application running on **Java 17** providing simple **CRUD A
 ## **Features**
 
 ### Book API
-- Create, Read, Update, Delete Books
+- Create, Read, Update
 - Search by Category (case-insensitive)
 
 ### Category API
-- Create, Read, Update, Delete Categories
+- Create, Read
 
 ### Payment Integration (Mock)
 - Payment API consumed via `WebClient`
