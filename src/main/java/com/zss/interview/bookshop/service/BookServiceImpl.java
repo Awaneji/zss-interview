@@ -78,7 +78,8 @@ public class BookServiceImpl implements BookService {
                 book.getTitle(),
                 book.getAuthor(),
                 book.getPrice(),
-                book.getCategory().getTitle()
+                book.getCategory().getTitle(),
+                book.getCreatedAt()
         );
     }
 }

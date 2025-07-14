@@ -13,8 +13,8 @@ import lombok.ToString;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
@@ -44,10 +44,11 @@ public class PaymentRequestDTO implements Serializable {
 
     public PaymentRequestDTO() {
         super();
-        ZonedDateTime zonedDateTime = ZonedDateTime.now(ZoneId.of("Africa/Harare"));
+        OffsetDateTime offsetDateTime = OffsetDateTime.now(ZoneOffset.of("+02:00"));
 
-        this.created = zonedDateTime.format(
+        this.created = offsetDateTime.format(
                 DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
         );
+
     }
 }
